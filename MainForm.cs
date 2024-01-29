@@ -22,22 +22,37 @@ namespace ControllerTest
 
         Controller controller = null;
 
-        private void logPrintLine(string s)
+        private void LogPrintLine(string s)
         {
-            logBox.Text += s + "\r\n";
-            logBox.Select(logBox.Text.Length - 1, 0);
-            logBox.ScrollToCaret();
+            LogBox.Text += s + "\r\n";
+            LogBox.Select(LogBox.Text.Length - 1, 0);
+            LogBox.ScrollToCaret();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            loadController(1);
+            FindAndLoadController();
         }
 
 
-        private void loadController(decimal index)
+        private void FindAndLoadController()
         {
-            enablePolling.Checked = testVibration.Checked = false;
+            for (int i = 1; i <= 4; i++)
+            {
+                if (LoadController(i, true))
+                {
+                    SelectedControllerIndex.Value = i;
+                    return;
+                }
+            }
+
+            LogPrintLine("No connected controllers found!");
+        }
+
+
+        private bool LoadController(decimal index, bool noFailAlert = false)
+        {
+            EnablePolling.Checked = TestVibration.Checked = false;
 
             UserIndex userIndex = UserIndex.One;
 
@@ -48,30 +63,47 @@ namespace ControllerTest
 
             controller = new Controller(userIndex);
 
-            enablePolling.Enabled = testVibration.Enabled = analogGroup.Enabled = buttonsGroup.Enabled = controller.IsConnected;
-            reconnectBtn.Visible = !controller.IsConnected;
+            EnablePolling.Enabled = TestVibration.Enabled = MainTabControl.Enabled = controller.IsConnected;
+            ReconnectBtn.Visible = !controller.IsConnected;
 
             if (!controller.IsConnected)
             {
-                logPrintLine("Controller " + index.ToString() + " is not connected!");
+                if (noFailAlert) return false;
+                LogPrintLine("Controller " + index.ToString() + " is not connected!");
                 SystemSounds.Exclamation.Play();
-                return;
+                return false;
             }
 
-            logPrintLine("Controller " + index.ToString() + " is connected!");
+            LogPrintLine("Controller " + index.ToString() + " is connected!");
 
-            enablePolling.Checked = true;
+            Capabilities capabilities = controller.GetCapabilities(DeviceQueryType.Any);
+
+            if (capabilities.Flags.HasFlag(CapabilityFlags.Wireless))
+            {
+                LogPrintLine("Wireless controller!");
+            }
+            if (capabilities.Flags.HasFlag(CapabilityFlags.FfbSupported))
+            {
+                LogPrintLine("Vibration supported!");
+                
+            }
+
+            VibrationSupported.Checked = capabilities.Flags.HasFlag(CapabilityFlags.FfbSupported);
+
+            EnablePolling.Checked = true;
+
+            return true;
         }
 
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void PollingTimer_Tick(object sender, EventArgs e)
         {
             if (!controller.IsConnected)
             {
-                pollingTimer.Enabled = false;
-                logPrintLine("Controller disconnected!");
+                PollingTimer.Enabled = false;
+                LogPrintLine("Controller disconnected!");
                 SystemSounds.Exclamation.Play();
-                reconnectBtn.Visible = true;
+                ReconnectBtn.Visible = true;
                 return;
             }
 
@@ -80,10 +112,18 @@ namespace ControllerTest
             LeftTrigger.Value = g.LeftTrigger;
             LeftX.Value = g.LeftThumbX + 32768;
             LeftY.Value = g.LeftThumbY + 32768;
+            
+            LeftTriggerVal.Text = g.LeftTrigger.ToString();
+            LeftXVal.Text = g.LeftThumbX.ToString();
+            LeftYVal.Text = g.LeftThumbY.ToString();
 
             RightTrigger.Value = g.RightTrigger;
             RightX.Value = g.RightThumbX + 32768;
             RightY.Value = g.RightThumbY + 32768;
+
+            RightTriggerVal.Text = g.RightTrigger.ToString();
+            RightXVal.Text = g.RightThumbX.ToString();
+            RightYVal.Text = g.RightThumbY.ToString();
 
             BackBtn.Checked = (g.Buttons & GamepadButtonFlags.Back) != 0;
             StartBtn.Checked = (g.Buttons & GamepadButtonFlags.Start) != 0;
@@ -105,35 +145,51 @@ namespace ControllerTest
             RightBtn.Checked = (g.Buttons & GamepadButtonFlags.DPadRight) != 0;
         }
 
-        private void enablePolling_CheckedChanged(object sender, EventArgs e)
+        private void EnablePolling_CheckedChanged(object sender, EventArgs e)
         {
-            pollingTimer.Enabled = enablePolling.Checked;
+            PollingTimer.Enabled = EnablePolling.Checked;
 
-            logPrintLine((enablePolling.Checked ? "Start" : "Stop") + " polling timer!");
+            LogPrintLine((EnablePolling.Checked ? "Start" : "Stop") + " polling timer!");
         }
 
-        private void testVibration_CheckedChanged(object sender, EventArgs e)
+        private void TestVibration_CheckedChanged(object sender, EventArgs e)
         {
-            bool isVibrating = testVibration.Checked;
+            UpdateVibration();
+            LogPrintLine("Controller vibration test " + (TestVibration.Checked ? "on" : "off"));
+        }
+
+        private void UpdateVibration()
+        {
+            bool isVibrating = TestVibration.Checked;
 
             Vibration v = new Vibration();
 
-            v.LeftMotorSpeed = (ushort)(isVibrating ? 32767 : 0);
-            v.RightMotorSpeed = (ushort)(isVibrating ? 32767 : 0);
+            v.LeftMotorSpeed = (ushort)(isVibrating ? LeftVibration.Value : 0);
+            v.RightMotorSpeed = (ushort)(isVibrating ? RightVibration.Value : 0);
 
             controller.SetVibration(v);
-
-            logPrintLine("Controller vibration test " + (isVibrating ? "on" : "off"));
         }
 
-        private void selectedController_ValueChanged(object sender, EventArgs e)
+        private void SelectedControllerIndex_ValueChanged(object sender, EventArgs e)
         {
-            loadController(selectedController.Value);
+            LoadController(SelectedControllerIndex.Value);
         }
 
-        private void reconnectBtn_Click(object sender, EventArgs e)
+        private void ReconnectBtn_Click(object sender, EventArgs e)
         {
-            loadController(selectedController.Value);
+            LoadController(SelectedControllerIndex.Value);
+        }
+
+        private void LeftVibration_Scroll(object sender, EventArgs e)
+        {
+            LeftVibrationValue.Text = LeftVibration.Value.ToString();
+            UpdateVibration();
+        }
+
+        private void RightVibration_Scroll(object sender, EventArgs e)
+        {
+            RightVibrationValue.Text = RightVibration.Value.ToString();
+            UpdateVibration();
         }
     }
 }

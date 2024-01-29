@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.logBox = new System.Windows.Forms.TextBox();
-            this.logPanel = new System.Windows.Forms.Panel();
-            this.pollingTimer = new System.Windows.Forms.Timer(this.components);
+            this.LogBox = new System.Windows.Forms.TextBox();
+            this.LogPanel = new System.Windows.Forms.Panel();
+            this.PollingTimer = new System.Windows.Forms.Timer(this.components);
             this.LeftX = new System.Windows.Forms.ProgressBar();
             this.LeftY = new System.Windows.Forms.ProgressBar();
             this.RightX = new System.Windows.Forms.ProgressBar();
@@ -44,8 +44,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.analogGroup = new System.Windows.Forms.GroupBox();
-            this.buttonsGroup = new System.Windows.Forms.GroupBox();
+            this.AnalogGroup = new System.Windows.Forms.GroupBox();
+            this.RightTriggerVal = new System.Windows.Forms.Label();
+            this.RightYVal = new System.Windows.Forms.Label();
+            this.RightXVal = new System.Windows.Forms.Label();
+            this.LeftTriggerVal = new System.Windows.Forms.Label();
+            this.LeftYVal = new System.Windows.Forms.Label();
+            this.LeftXVal = new System.Windows.Forms.Label();
+            this.ButtonsGroup = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.RightThumb = new System.Windows.Forms.CheckBox();
@@ -62,51 +69,66 @@
             this.XBtn = new System.Windows.Forms.CheckBox();
             this.StartBtn = new System.Windows.Forms.CheckBox();
             this.BackBtn = new System.Windows.Forms.CheckBox();
-            this.selectedController = new System.Windows.Forms.NumericUpDown();
+            this.SelectedControllerIndex = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.enablePolling = new System.Windows.Forms.CheckBox();
-            this.testVibration = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.reconnectBtn = new System.Windows.Forms.Button();
-            this.logPanel.SuspendLayout();
-            this.analogGroup.SuspendLayout();
-            this.buttonsGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedController)).BeginInit();
+            this.EnablePolling = new System.Windows.Forms.CheckBox();
+            this.TestVibration = new System.Windows.Forms.CheckBox();
+            this.ReconnectBtn = new System.Windows.Forms.Button();
+            this.MainTabControl = new System.Windows.Forms.TabControl();
+            this.InputsTab = new System.Windows.Forms.TabPage();
+            this.VibrationTab = new System.Windows.Forms.TabPage();
+            this.VibrationGroup = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.RightVibrationValue = new System.Windows.Forms.Label();
+            this.LeftVibrationValue = new System.Windows.Forms.Label();
+            this.LeftVibration = new System.Windows.Forms.TrackBar();
+            this.RightVibration = new System.Windows.Forms.TrackBar();
+            this.label12 = new System.Windows.Forms.Label();
+            this.VibrationSupported = new System.Windows.Forms.CheckBox();
+            this.LogPanel.SuspendLayout();
+            this.AnalogGroup.SuspendLayout();
+            this.ButtonsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectedControllerIndex)).BeginInit();
+            this.MainTabControl.SuspendLayout();
+            this.InputsTab.SuspendLayout();
+            this.VibrationTab.SuspendLayout();
+            this.VibrationGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LeftVibration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightVibration)).BeginInit();
             this.SuspendLayout();
             // 
-            // logBox
+            // LogBox
             // 
-            this.logBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logBox.Location = new System.Drawing.Point(0, 0);
-            this.logBox.Multiline = true;
-            this.logBox.Name = "logBox";
-            this.logBox.ReadOnly = true;
-            this.logBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logBox.Size = new System.Drawing.Size(516, 118);
-            this.logBox.TabIndex = 0;
+            this.LogBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LogBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LogBox.Location = new System.Drawing.Point(0, 0);
+            this.LogBox.Multiline = true;
+            this.LogBox.Name = "LogBox";
+            this.LogBox.ReadOnly = true;
+            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LogBox.Size = new System.Drawing.Size(534, 149);
+            this.LogBox.TabIndex = 0;
             // 
-            // logPanel
+            // LogPanel
             // 
-            this.logPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.LogPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.logPanel.Controls.Add(this.logBox);
-            this.logPanel.Location = new System.Drawing.Point(12, 275);
-            this.logPanel.Name = "logPanel";
-            this.logPanel.Size = new System.Drawing.Size(520, 122);
-            this.logPanel.TabIndex = 1;
+            this.LogPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LogPanel.Controls.Add(this.LogBox);
+            this.LogPanel.Location = new System.Drawing.Point(12, 315);
+            this.LogPanel.Name = "LogPanel";
+            this.LogPanel.Size = new System.Drawing.Size(538, 153);
+            this.LogPanel.TabIndex = 1;
             // 
-            // pollingTimer
+            // PollingTimer
             // 
-            this.pollingTimer.Interval = 10;
-            this.pollingTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.PollingTimer.Interval = 10;
+            this.PollingTimer.Tick += new System.EventHandler(this.PollingTimer_Tick);
             // 
             // LeftX
             // 
             this.LeftX.ForeColor = System.Drawing.Color.Green;
-            this.LeftX.Location = new System.Drawing.Point(134, 19);
+            this.LeftX.Location = new System.Drawing.Point(108, 19);
             this.LeftX.Maximum = 65535;
             this.LeftX.Name = "LeftX";
             this.LeftX.Size = new System.Drawing.Size(100, 18);
@@ -116,7 +138,7 @@
             // LeftY
             // 
             this.LeftY.ForeColor = System.Drawing.Color.Green;
-            this.LeftY.Location = new System.Drawing.Point(134, 43);
+            this.LeftY.Location = new System.Drawing.Point(108, 43);
             this.LeftY.Maximum = 65535;
             this.LeftY.Name = "LeftY";
             this.LeftY.Size = new System.Drawing.Size(100, 18);
@@ -146,7 +168,7 @@
             // LeftTrigger
             // 
             this.LeftTrigger.ForeColor = System.Drawing.Color.Green;
-            this.LeftTrigger.Location = new System.Drawing.Point(134, 67);
+            this.LeftTrigger.Location = new System.Drawing.Point(108, 67);
             this.LeftTrigger.Maximum = 255;
             this.LeftTrigger.Name = "LeftTrigger";
             this.LeftTrigger.Size = new System.Drawing.Size(100, 18);
@@ -166,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 22);
+            this.label1.Location = new System.Drawing.Point(57, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 9;
@@ -175,7 +197,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(83, 46);
+            this.label2.Location = new System.Drawing.Point(57, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 10;
@@ -202,7 +224,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 70);
+            this.label5.Location = new System.Drawing.Point(31, 70);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 13;
@@ -217,52 +239,122 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Right Trigger:";
             // 
-            // analogGroup
+            // AnalogGroup
             // 
-            this.analogGroup.Controls.Add(this.RightX);
-            this.analogGroup.Controls.Add(this.label6);
-            this.analogGroup.Controls.Add(this.LeftX);
-            this.analogGroup.Controls.Add(this.label5);
-            this.analogGroup.Controls.Add(this.LeftY);
-            this.analogGroup.Controls.Add(this.label4);
-            this.analogGroup.Controls.Add(this.RightY);
-            this.analogGroup.Controls.Add(this.label3);
-            this.analogGroup.Controls.Add(this.LeftTrigger);
-            this.analogGroup.Controls.Add(this.label2);
-            this.analogGroup.Controls.Add(this.RightTrigger);
-            this.analogGroup.Controls.Add(this.label1);
-            this.analogGroup.Location = new System.Drawing.Point(14, 41);
-            this.analogGroup.Name = "analogGroup";
-            this.analogGroup.Size = new System.Drawing.Size(518, 97);
-            this.analogGroup.TabIndex = 15;
-            this.analogGroup.TabStop = false;
-            this.analogGroup.Text = "Analog Input";
+            this.AnalogGroup.Controls.Add(this.RightTriggerVal);
+            this.AnalogGroup.Controls.Add(this.RightYVal);
+            this.AnalogGroup.Controls.Add(this.RightXVal);
+            this.AnalogGroup.Controls.Add(this.LeftTriggerVal);
+            this.AnalogGroup.Controls.Add(this.LeftYVal);
+            this.AnalogGroup.Controls.Add(this.LeftXVal);
+            this.AnalogGroup.Controls.Add(this.RightX);
+            this.AnalogGroup.Controls.Add(this.label6);
+            this.AnalogGroup.Controls.Add(this.LeftX);
+            this.AnalogGroup.Controls.Add(this.label5);
+            this.AnalogGroup.Controls.Add(this.LeftY);
+            this.AnalogGroup.Controls.Add(this.label4);
+            this.AnalogGroup.Controls.Add(this.RightY);
+            this.AnalogGroup.Controls.Add(this.label3);
+            this.AnalogGroup.Controls.Add(this.LeftTrigger);
+            this.AnalogGroup.Controls.Add(this.label2);
+            this.AnalogGroup.Controls.Add(this.RightTrigger);
+            this.AnalogGroup.Controls.Add(this.label1);
+            this.AnalogGroup.Location = new System.Drawing.Point(6, 6);
+            this.AnalogGroup.Name = "AnalogGroup";
+            this.AnalogGroup.Size = new System.Drawing.Size(518, 97);
+            this.AnalogGroup.TabIndex = 15;
+            this.AnalogGroup.TabStop = false;
+            this.AnalogGroup.Text = "Analog";
             // 
-            // buttonsGroup
+            // RightTriggerVal
             // 
-            this.buttonsGroup.Controls.Add(this.label10);
-            this.buttonsGroup.Controls.Add(this.label9);
-            this.buttonsGroup.Controls.Add(this.label8);
-            this.buttonsGroup.Controls.Add(this.RightThumb);
-            this.buttonsGroup.Controls.Add(this.LeftThumb);
-            this.buttonsGroup.Controls.Add(this.RightBumper);
-            this.buttonsGroup.Controls.Add(this.LeftBumper);
-            this.buttonsGroup.Controls.Add(this.RightBtn);
-            this.buttonsGroup.Controls.Add(this.DownBtn);
-            this.buttonsGroup.Controls.Add(this.UpBtn);
-            this.buttonsGroup.Controls.Add(this.LeftBtn);
-            this.buttonsGroup.Controls.Add(this.BBtn);
-            this.buttonsGroup.Controls.Add(this.ABtn);
-            this.buttonsGroup.Controls.Add(this.YBtn);
-            this.buttonsGroup.Controls.Add(this.XBtn);
-            this.buttonsGroup.Controls.Add(this.StartBtn);
-            this.buttonsGroup.Controls.Add(this.BackBtn);
-            this.buttonsGroup.Location = new System.Drawing.Point(14, 144);
-            this.buttonsGroup.Name = "buttonsGroup";
-            this.buttonsGroup.Size = new System.Drawing.Size(518, 125);
-            this.buttonsGroup.TabIndex = 16;
-            this.buttonsGroup.TabStop = false;
-            this.buttonsGroup.Text = "Buttons";
+            this.RightTriggerVal.AutoSize = true;
+            this.RightTriggerVal.Location = new System.Drawing.Point(451, 70);
+            this.RightTriggerVal.Name = "RightTriggerVal";
+            this.RightTriggerVal.Size = new System.Drawing.Size(10, 13);
+            this.RightTriggerVal.TabIndex = 20;
+            this.RightTriggerVal.Text = "-";
+            // 
+            // RightYVal
+            // 
+            this.RightYVal.AutoSize = true;
+            this.RightYVal.Location = new System.Drawing.Point(451, 46);
+            this.RightYVal.Name = "RightYVal";
+            this.RightYVal.Size = new System.Drawing.Size(10, 13);
+            this.RightYVal.TabIndex = 19;
+            this.RightYVal.Text = "-";
+            // 
+            // RightXVal
+            // 
+            this.RightXVal.AutoSize = true;
+            this.RightXVal.Location = new System.Drawing.Point(451, 22);
+            this.RightXVal.Name = "RightXVal";
+            this.RightXVal.Size = new System.Drawing.Size(10, 13);
+            this.RightXVal.TabIndex = 18;
+            this.RightXVal.Text = "-";
+            // 
+            // LeftTriggerVal
+            // 
+            this.LeftTriggerVal.AutoSize = true;
+            this.LeftTriggerVal.Location = new System.Drawing.Point(214, 70);
+            this.LeftTriggerVal.Name = "LeftTriggerVal";
+            this.LeftTriggerVal.Size = new System.Drawing.Size(10, 13);
+            this.LeftTriggerVal.TabIndex = 17;
+            this.LeftTriggerVal.Text = "-";
+            // 
+            // LeftYVal
+            // 
+            this.LeftYVal.AutoSize = true;
+            this.LeftYVal.Location = new System.Drawing.Point(214, 46);
+            this.LeftYVal.Name = "LeftYVal";
+            this.LeftYVal.Size = new System.Drawing.Size(10, 13);
+            this.LeftYVal.TabIndex = 16;
+            this.LeftYVal.Text = "-";
+            // 
+            // LeftXVal
+            // 
+            this.LeftXVal.AutoSize = true;
+            this.LeftXVal.Location = new System.Drawing.Point(214, 22);
+            this.LeftXVal.Name = "LeftXVal";
+            this.LeftXVal.Size = new System.Drawing.Size(10, 13);
+            this.LeftXVal.TabIndex = 15;
+            this.LeftXVal.Text = "-";
+            // 
+            // ButtonsGroup
+            // 
+            this.ButtonsGroup.Controls.Add(this.label10);
+            this.ButtonsGroup.Controls.Add(this.label9);
+            this.ButtonsGroup.Controls.Add(this.label8);
+            this.ButtonsGroup.Controls.Add(this.RightThumb);
+            this.ButtonsGroup.Controls.Add(this.LeftThumb);
+            this.ButtonsGroup.Controls.Add(this.RightBumper);
+            this.ButtonsGroup.Controls.Add(this.LeftBumper);
+            this.ButtonsGroup.Controls.Add(this.RightBtn);
+            this.ButtonsGroup.Controls.Add(this.DownBtn);
+            this.ButtonsGroup.Controls.Add(this.UpBtn);
+            this.ButtonsGroup.Controls.Add(this.LeftBtn);
+            this.ButtonsGroup.Controls.Add(this.BBtn);
+            this.ButtonsGroup.Controls.Add(this.ABtn);
+            this.ButtonsGroup.Controls.Add(this.YBtn);
+            this.ButtonsGroup.Controls.Add(this.XBtn);
+            this.ButtonsGroup.Controls.Add(this.StartBtn);
+            this.ButtonsGroup.Controls.Add(this.BackBtn);
+            this.ButtonsGroup.Location = new System.Drawing.Point(6, 109);
+            this.ButtonsGroup.Name = "ButtonsGroup";
+            this.ButtonsGroup.Size = new System.Drawing.Size(518, 125);
+            this.ButtonsGroup.TabIndex = 16;
+            this.ButtonsGroup.TabStop = false;
+            this.ButtonsGroup.Text = "Buttons";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Enabled = false;
+            this.label10.Location = new System.Drawing.Point(220, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(78, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Thumb buttons";
             // 
             // label9
             // 
@@ -456,108 +548,233 @@
             this.BackBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BackBtn.UseVisualStyleBackColor = true;
             // 
-            // selectedController
+            // SelectedControllerIndex
             // 
-            this.selectedController.Location = new System.Drawing.Point(479, 15);
-            this.selectedController.Maximum = new decimal(new int[] {
+            this.SelectedControllerIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SelectedControllerIndex.Location = new System.Drawing.Point(507, 15);
+            this.SelectedControllerIndex.Maximum = new decimal(new int[] {
             4,
             0,
             0,
             0});
-            this.selectedController.Minimum = new decimal(new int[] {
+            this.SelectedControllerIndex.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.selectedController.Name = "selectedController";
-            this.selectedController.Size = new System.Drawing.Size(43, 20);
-            this.selectedController.TabIndex = 17;
-            this.selectedController.Value = new decimal(new int[] {
+            this.SelectedControllerIndex.Name = "SelectedControllerIndex";
+            this.SelectedControllerIndex.Size = new System.Drawing.Size(43, 20);
+            this.SelectedControllerIndex.TabIndex = 17;
+            this.SelectedControllerIndex.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.selectedController.ValueChanged += new System.EventHandler(this.selectedController_ValueChanged);
+            this.SelectedControllerIndex.ValueChanged += new System.EventHandler(this.SelectedControllerIndex_ValueChanged);
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(390, 17);
+            this.label7.Location = new System.Drawing.Point(418, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
             this.label7.TabIndex = 18;
             this.label7.Text = "Controller Index:";
             // 
-            // enablePolling
+            // EnablePolling
             // 
-            this.enablePolling.Appearance = System.Windows.Forms.Appearance.Button;
-            this.enablePolling.Location = new System.Drawing.Point(14, 12);
-            this.enablePolling.Name = "enablePolling";
-            this.enablePolling.Size = new System.Drawing.Size(104, 23);
-            this.enablePolling.TabIndex = 19;
-            this.enablePolling.Text = "Enable polling";
-            this.enablePolling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.enablePolling.UseVisualStyleBackColor = true;
-            this.enablePolling.CheckedChanged += new System.EventHandler(this.enablePolling_CheckedChanged);
+            this.EnablePolling.Appearance = System.Windows.Forms.Appearance.Button;
+            this.EnablePolling.Location = new System.Drawing.Point(14, 12);
+            this.EnablePolling.Name = "EnablePolling";
+            this.EnablePolling.Size = new System.Drawing.Size(104, 23);
+            this.EnablePolling.TabIndex = 19;
+            this.EnablePolling.Text = "Enable polling";
+            this.EnablePolling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EnablePolling.UseVisualStyleBackColor = true;
+            this.EnablePolling.CheckedChanged += new System.EventHandler(this.EnablePolling_CheckedChanged);
             // 
-            // testVibration
+            // TestVibration
             // 
-            this.testVibration.Appearance = System.Windows.Forms.Appearance.Button;
-            this.testVibration.Location = new System.Drawing.Point(124, 12);
-            this.testVibration.Name = "testVibration";
-            this.testVibration.Size = new System.Drawing.Size(104, 23);
-            this.testVibration.TabIndex = 20;
-            this.testVibration.Text = "Test vibration";
-            this.testVibration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.testVibration.UseVisualStyleBackColor = true;
-            this.testVibration.CheckedChanged += new System.EventHandler(this.testVibration_CheckedChanged);
+            this.TestVibration.Appearance = System.Windows.Forms.Appearance.Button;
+            this.TestVibration.Location = new System.Drawing.Point(9, 120);
+            this.TestVibration.Name = "TestVibration";
+            this.TestVibration.Size = new System.Drawing.Size(104, 23);
+            this.TestVibration.TabIndex = 20;
+            this.TestVibration.Text = "Test vibration";
+            this.TestVibration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TestVibration.UseVisualStyleBackColor = true;
+            this.TestVibration.CheckedChanged += new System.EventHandler(this.TestVibration_CheckedChanged);
             // 
-            // label10
+            // ReconnectBtn
             // 
-            this.label10.AutoSize = true;
-            this.label10.Enabled = false;
-            this.label10.Location = new System.Drawing.Point(220, 30);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(78, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Thumb buttons";
+            this.ReconnectBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ReconnectBtn.Location = new System.Drawing.Point(324, 12);
+            this.ReconnectBtn.Name = "ReconnectBtn";
+            this.ReconnectBtn.Size = new System.Drawing.Size(85, 23);
+            this.ReconnectBtn.TabIndex = 21;
+            this.ReconnectBtn.Text = "Reconnect";
+            this.ReconnectBtn.UseVisualStyleBackColor = true;
+            this.ReconnectBtn.Click += new System.EventHandler(this.ReconnectBtn_Click);
             // 
-            // reconnectBtn
+            // MainTabControl
             // 
-            this.reconnectBtn.Location = new System.Drawing.Point(296, 12);
-            this.reconnectBtn.Name = "reconnectBtn";
-            this.reconnectBtn.Size = new System.Drawing.Size(85, 23);
-            this.reconnectBtn.TabIndex = 21;
-            this.reconnectBtn.Text = "Reconnect";
-            this.reconnectBtn.UseVisualStyleBackColor = true;
-            this.reconnectBtn.Click += new System.EventHandler(this.reconnectBtn_Click);
+            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainTabControl.Controls.Add(this.InputsTab);
+            this.MainTabControl.Controls.Add(this.VibrationTab);
+            this.MainTabControl.Location = new System.Drawing.Point(12, 41);
+            this.MainTabControl.Name = "MainTabControl";
+            this.MainTabControl.SelectedIndex = 0;
+            this.MainTabControl.Size = new System.Drawing.Size(540, 268);
+            this.MainTabControl.TabIndex = 22;
+            // 
+            // InputsTab
+            // 
+            this.InputsTab.Controls.Add(this.AnalogGroup);
+            this.InputsTab.Controls.Add(this.ButtonsGroup);
+            this.InputsTab.Location = new System.Drawing.Point(4, 22);
+            this.InputsTab.Name = "InputsTab";
+            this.InputsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.InputsTab.Size = new System.Drawing.Size(532, 242);
+            this.InputsTab.TabIndex = 0;
+            this.InputsTab.Text = "Inputs";
+            this.InputsTab.UseVisualStyleBackColor = true;
+            // 
+            // VibrationTab
+            // 
+            this.VibrationTab.Controls.Add(this.VibrationGroup);
+            this.VibrationTab.Controls.Add(this.VibrationSupported);
+            this.VibrationTab.Location = new System.Drawing.Point(4, 22);
+            this.VibrationTab.Name = "VibrationTab";
+            this.VibrationTab.Padding = new System.Windows.Forms.Padding(3);
+            this.VibrationTab.Size = new System.Drawing.Size(532, 242);
+            this.VibrationTab.TabIndex = 1;
+            this.VibrationTab.Text = "Vibration";
+            this.VibrationTab.UseVisualStyleBackColor = true;
+            // 
+            // VibrationGroup
+            // 
+            this.VibrationGroup.Controls.Add(this.label11);
+            this.VibrationGroup.Controls.Add(this.RightVibrationValue);
+            this.VibrationGroup.Controls.Add(this.TestVibration);
+            this.VibrationGroup.Controls.Add(this.LeftVibrationValue);
+            this.VibrationGroup.Controls.Add(this.LeftVibration);
+            this.VibrationGroup.Controls.Add(this.RightVibration);
+            this.VibrationGroup.Controls.Add(this.label12);
+            this.VibrationGroup.Location = new System.Drawing.Point(6, 34);
+            this.VibrationGroup.Name = "VibrationGroup";
+            this.VibrationGroup.Size = new System.Drawing.Size(520, 159);
+            this.VibrationGroup.TabIndex = 29;
+            this.VibrationGroup.TabStop = false;
+            this.VibrationGroup.Text = "Vibration";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(54, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Left motor";
+            // 
+            // RightVibrationValue
+            // 
+            this.RightVibrationValue.AutoSize = true;
+            this.RightVibrationValue.Location = new System.Drawing.Point(320, 73);
+            this.RightVibrationValue.Name = "RightVibrationValue";
+            this.RightVibrationValue.Size = new System.Drawing.Size(37, 13);
+            this.RightVibrationValue.TabIndex = 28;
+            this.RightVibrationValue.Text = "32768";
+            // 
+            // LeftVibrationValue
+            // 
+            this.LeftVibrationValue.AutoSize = true;
+            this.LeftVibrationValue.Location = new System.Drawing.Point(320, 22);
+            this.LeftVibrationValue.Name = "LeftVibrationValue";
+            this.LeftVibrationValue.Size = new System.Drawing.Size(37, 13);
+            this.LeftVibrationValue.TabIndex = 26;
+            this.LeftVibrationValue.Text = "32768";
+            // 
+            // LeftVibration
+            // 
+            this.LeftVibration.LargeChange = 2048;
+            this.LeftVibration.Location = new System.Drawing.Point(81, 18);
+            this.LeftVibration.Maximum = 65535;
+            this.LeftVibration.Name = "LeftVibration";
+            this.LeftVibration.Size = new System.Drawing.Size(233, 45);
+            this.LeftVibration.SmallChange = 1024;
+            this.LeftVibration.TabIndex = 22;
+            this.LeftVibration.TickFrequency = 2048;
+            this.LeftVibration.Value = 32768;
+            this.LeftVibration.Scroll += new System.EventHandler(this.LeftVibration_Scroll);
+            // 
+            // RightVibration
+            // 
+            this.RightVibration.LargeChange = 2048;
+            this.RightVibration.Location = new System.Drawing.Point(81, 69);
+            this.RightVibration.Maximum = 65535;
+            this.RightVibration.Name = "RightVibration";
+            this.RightVibration.Size = new System.Drawing.Size(233, 45);
+            this.RightVibration.SmallChange = 1024;
+            this.RightVibration.TabIndex = 25;
+            this.RightVibration.TickFrequency = 2048;
+            this.RightVibration.Value = 32768;
+            this.RightVibration.Scroll += new System.EventHandler(this.RightVibration_Scroll);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(9, 73);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Right motor";
+            // 
+            // VibrationSupported
+            // 
+            this.VibrationSupported.AutoCheck = false;
+            this.VibrationSupported.AutoSize = true;
+            this.VibrationSupported.Location = new System.Drawing.Point(8, 11);
+            this.VibrationSupported.Name = "VibrationSupported";
+            this.VibrationSupported.Size = new System.Drawing.Size(117, 17);
+            this.VibrationSupported.TabIndex = 21;
+            this.VibrationSupported.Text = "Vibration supported";
+            this.VibrationSupported.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 409);
-            this.Controls.Add(this.reconnectBtn);
-            this.Controls.Add(this.testVibration);
-            this.Controls.Add(this.enablePolling);
+            this.ClientSize = new System.Drawing.Size(562, 480);
+            this.Controls.Add(this.MainTabControl);
+            this.Controls.Add(this.ReconnectBtn);
+            this.Controls.Add(this.EnablePolling);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.selectedController);
-            this.Controls.Add(this.buttonsGroup);
-            this.Controls.Add(this.analogGroup);
-            this.Controls.Add(this.logPanel);
+            this.Controls.Add(this.SelectedControllerIndex);
+            this.Controls.Add(this.LogPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XInput Controller Test";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.logPanel.ResumeLayout(false);
-            this.logPanel.PerformLayout();
-            this.analogGroup.ResumeLayout(false);
-            this.analogGroup.PerformLayout();
-            this.buttonsGroup.ResumeLayout(false);
-            this.buttonsGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedController)).EndInit();
+            this.LogPanel.ResumeLayout(false);
+            this.LogPanel.PerformLayout();
+            this.AnalogGroup.ResumeLayout(false);
+            this.AnalogGroup.PerformLayout();
+            this.ButtonsGroup.ResumeLayout(false);
+            this.ButtonsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectedControllerIndex)).EndInit();
+            this.MainTabControl.ResumeLayout(false);
+            this.InputsTab.ResumeLayout(false);
+            this.VibrationTab.ResumeLayout(false);
+            this.VibrationTab.PerformLayout();
+            this.VibrationGroup.ResumeLayout(false);
+            this.VibrationGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LeftVibration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightVibration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -565,9 +782,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox logBox;
-        private System.Windows.Forms.Panel logPanel;
-        private System.Windows.Forms.Timer pollingTimer;
+        private System.Windows.Forms.TextBox LogBox;
+        private System.Windows.Forms.Panel LogPanel;
+        private System.Windows.Forms.Timer PollingTimer;
         private System.Windows.Forms.ProgressBar LeftX;
         private System.Windows.Forms.ProgressBar LeftY;
         private System.Windows.Forms.ProgressBar RightX;
@@ -580,8 +797,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox analogGroup;
-        private System.Windows.Forms.GroupBox buttonsGroup;
+        private System.Windows.Forms.GroupBox AnalogGroup;
+        private System.Windows.Forms.GroupBox ButtonsGroup;
         private System.Windows.Forms.CheckBox BBtn;
         private System.Windows.Forms.CheckBox ABtn;
         private System.Windows.Forms.CheckBox YBtn;
@@ -594,16 +811,33 @@
         private System.Windows.Forms.CheckBox DownBtn;
         private System.Windows.Forms.CheckBox UpBtn;
         private System.Windows.Forms.CheckBox LeftBtn;
-        private System.Windows.Forms.NumericUpDown selectedController;
+        private System.Windows.Forms.NumericUpDown SelectedControllerIndex;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox enablePolling;
-        private System.Windows.Forms.CheckBox testVibration;
+        private System.Windows.Forms.CheckBox EnablePolling;
+        private System.Windows.Forms.CheckBox TestVibration;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox RightThumb;
         private System.Windows.Forms.CheckBox LeftThumb;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button reconnectBtn;
+        private System.Windows.Forms.Button ReconnectBtn;
+        private System.Windows.Forms.TabControl MainTabControl;
+        private System.Windows.Forms.TabPage InputsTab;
+        private System.Windows.Forms.TabPage VibrationTab;
+        private System.Windows.Forms.Label RightTriggerVal;
+        private System.Windows.Forms.Label RightYVal;
+        private System.Windows.Forms.Label RightXVal;
+        private System.Windows.Forms.Label LeftTriggerVal;
+        private System.Windows.Forms.Label LeftYVal;
+        private System.Windows.Forms.Label LeftXVal;
+        private System.Windows.Forms.TrackBar LeftVibration;
+        private System.Windows.Forms.CheckBox VibrationSupported;
+        private System.Windows.Forms.TrackBar RightVibration;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label RightVibrationValue;
+        private System.Windows.Forms.Label LeftVibrationValue;
+        private System.Windows.Forms.GroupBox VibrationGroup;
     }
 }
 
