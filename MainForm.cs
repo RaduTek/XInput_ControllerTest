@@ -96,6 +96,43 @@ namespace ControllerTest
         }
 
 
+        //private int MapInt(int x, int iA, int iB, int dA, int dB) 
+        //{
+        //    return dA + (int)((double)((x - iA) / (double)iB) * dB);
+        //}
+
+        private int MapInt(int x, int iA, int iB, int dA, int dB)
+        {
+            // Check for division by zero and handle invalid input ranges
+            if (iB == iA || dB == dA)
+            {
+                throw new ArgumentException("Invalid input or output range: width of range cannot be zero.");
+            }
+
+            // Clamp input value to the valid input range
+            x = Math.Max(iA, Math.Min(x, iB));
+
+            // Calculate mapped value using floating-point arithmetic for accuracy
+            double ratio = (double)(x - iA) / (iB - iA);
+            double mappedValue = dA + ratio * (dB - dA);
+
+            // Handle potential integer overflow
+            if (mappedValue > int.MaxValue)
+            {
+                return int.MaxValue;
+            }
+            else if (mappedValue < int.MinValue)
+            {
+                return int.MinValue;
+            }
+            else
+            {
+                return (int)mappedValue;
+            }
+        }
+
+
+
         private void PollingTimer_Tick(object sender, EventArgs e)
         {
             if (!controller.IsConnected)
@@ -143,6 +180,9 @@ namespace ControllerTest
             DownBtn.Checked = (g.Buttons & GamepadButtonFlags.DPadDown) != 0;
             LeftBtn.Checked = (g.Buttons & GamepadButtonFlags.DPadLeft) != 0;
             RightBtn.Checked = (g.Buttons & GamepadButtonFlags.DPadRight) != 0;
+
+            LeftThumbView.Refresh();
+            RightThumbView.Refresh();
         }
 
         private void EnablePolling_CheckedChanged(object sender, EventArgs e)
@@ -162,10 +202,11 @@ namespace ControllerTest
         {
             bool isVibrating = TestVibration.Checked;
 
-            Vibration v = new Vibration();
-
-            v.LeftMotorSpeed = (ushort)(isVibrating ? LeftVibration.Value : 0);
-            v.RightMotorSpeed = (ushort)(isVibrating ? RightVibration.Value : 0);
+            Vibration v = new Vibration
+            {
+                LeftMotorSpeed = (ushort)(isVibrating ? LeftVibration.Value : 0),
+                RightMotorSpeed = (ushort)(isVibrating ? RightVibration.Value : 0)
+            };
 
             controller.SetVibration(v);
         }
@@ -190,6 +231,38 @@ namespace ControllerTest
         {
             RightVibrationValue.Text = RightVibration.Value.ToString();
             UpdateVibration();
+        }
+
+        private void LeftThumbView_Paint(object sender, PaintEventArgs e)
+        {
+            if (controller.IsConnected)
+            {
+                Gamepad g = controller.GetState().Gamepad;
+
+                int markerX = MapInt(g.LeftThumbX, -32768, 32767, 0, 200);
+                int markerY = 200 - MapInt(g.LeftThumbY, -32768, 32767, 0, 200);
+
+                using (SolidBrush brush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.FillEllipse(brush, markerX - 2, markerY - 2, 4, 4);
+                }
+            }
+        }
+
+        private void RightThumbView_Paint(object sender, PaintEventArgs e)
+        {
+            if (controller.IsConnected)
+            {
+                Gamepad g = controller.GetState().Gamepad;
+
+                int markerX = MapInt(g.RightThumbX, -32768, 32767, 0, 200);
+                int markerY = 200 - MapInt(g.RightThumbY, -32768, 32767, 0, 200);
+
+                using (SolidBrush brush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.FillEllipse(brush, markerX - 2, markerY - 2, 4, 4);
+                }
+            }
         }
     }
 }
