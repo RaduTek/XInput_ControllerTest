@@ -89,8 +89,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.RightThumbView = new System.Windows.Forms.PictureBox();
             this.LeftThumbView = new System.Windows.Forms.PictureBox();
+            this.RightThumbView = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.PollingRateValue = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
             this.LogPanel.SuspendLayout();
             this.AnalogGroup.SuspendLayout();
             this.ButtonsGroup.SuspendLayout();
@@ -103,6 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.RightVibration)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LeftThumbView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightThumbView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PollingRateValue)).BeginInit();
             this.SuspendLayout();
             // 
             // LogBox
@@ -595,7 +600,7 @@
             this.EnablePolling.Appearance = System.Windows.Forms.Appearance.Button;
             this.EnablePolling.Location = new System.Drawing.Point(14, 12);
             this.EnablePolling.Name = "EnablePolling";
-            this.EnablePolling.Size = new System.Drawing.Size(104, 23);
+            this.EnablePolling.Size = new System.Drawing.Size(98, 23);
             this.EnablePolling.TabIndex = 19;
             this.EnablePolling.Text = "Enable polling";
             this.EnablePolling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -784,16 +789,6 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Left Thumb";
             // 
-            // RightThumbView
-            // 
-            this.RightThumbView.BackColor = System.Drawing.Color.White;
-            this.RightThumbView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.RightThumbView.Location = new System.Drawing.Point(296, 6);
-            this.RightThumbView.Name = "RightThumbView";
-            this.RightThumbView.Size = new System.Drawing.Size(204, 204);
-            this.RightThumbView.TabIndex = 1;
-            this.RightThumbView.Paint += new System.Windows.Forms.PaintEventHandler(this.RightThumbView_Paint);
-            // 
             // LeftThumbView
             // 
             this.LeftThumbView.BackColor = System.Drawing.Color.White;
@@ -805,11 +800,66 @@
             this.LeftThumbView.TabStop = false;
             this.LeftThumbView.Paint += new System.Windows.Forms.PaintEventHandler(this.LeftThumbView_Paint);
             // 
+            // RightThumbView
+            // 
+            this.RightThumbView.BackColor = System.Drawing.Color.White;
+            this.RightThumbView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.RightThumbView.Location = new System.Drawing.Point(296, 6);
+            this.RightThumbView.Name = "RightThumbView";
+            this.RightThumbView.Size = new System.Drawing.Size(204, 204);
+            this.RightThumbView.TabIndex = 1;
+            this.RightThumbView.TabStop = false;
+            this.RightThumbView.Paint += new System.Windows.Forms.PaintEventHandler(this.RightThumbView_Paint);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(118, 17);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(33, 13);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "Rate:";
+            // 
+            // PollingRateValue
+            // 
+            this.PollingRateValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PollingRateValue.Location = new System.Drawing.Point(157, 15);
+            this.PollingRateValue.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.PollingRateValue.Minimum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.PollingRateValue.Name = "PollingRateValue";
+            this.PollingRateValue.Size = new System.Drawing.Size(57, 20);
+            this.PollingRateValue.TabIndex = 24;
+            this.PollingRateValue.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(220, 17);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(20, 13);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "ms";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 480);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.PollingRateValue);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ReconnectBtn);
             this.Controls.Add(this.EnablePolling);
@@ -841,6 +891,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LeftThumbView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightThumbView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PollingRateValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -909,6 +961,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox RightThumbView;
         private System.Windows.Forms.PictureBox LeftThumbView;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown PollingRateValue;
+        private System.Windows.Forms.Label label16;
     }
 }
 

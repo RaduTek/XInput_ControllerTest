@@ -80,11 +80,11 @@ namespace ControllerTest
 
             if (capabilities.Flags.HasFlag(CapabilityFlags.Wireless))
             {
-                LogPrintLine("Wireless controller!");
+                LogPrintLine("  -> Is wireless");
             }
             if (capabilities.Flags.HasFlag(CapabilityFlags.FfbSupported))
             {
-                LogPrintLine("Vibration supported!");
+                LogPrintLine("  -> Supports vibration");
                 
             }
 
@@ -95,28 +95,18 @@ namespace ControllerTest
             return true;
         }
 
-
-        //private int MapInt(int x, int iA, int iB, int dA, int dB) 
-        //{
-        //    return dA + (int)((double)((x - iA) / (double)iB) * dB);
-        //}
-
         private int MapInt(int x, int iA, int iB, int dA, int dB)
         {
-            // Check for division by zero and handle invalid input ranges
             if (iB == iA || dB == dA)
             {
                 throw new ArgumentException("Invalid input or output range: width of range cannot be zero.");
             }
 
-            // Clamp input value to the valid input range
             x = Math.Max(iA, Math.Min(x, iB));
 
-            // Calculate mapped value using floating-point arithmetic for accuracy
             double ratio = (double)(x - iA) / (iB - iA);
             double mappedValue = dA + ratio * (dB - dA);
 
-            // Handle potential integer overflow
             if (mappedValue > int.MaxValue)
             {
                 return int.MaxValue;
@@ -187,9 +177,15 @@ namespace ControllerTest
 
         private void EnablePolling_CheckedChanged(object sender, EventArgs e)
         {
+            PollingRateValue.Enabled = !EnablePolling.Checked;
+            
+            PollingTimer.Interval = (int)PollingRateValue.Value;
             PollingTimer.Enabled = EnablePolling.Checked;
-
-            LogPrintLine((EnablePolling.Checked ? "Start" : "Stop") + " polling timer!");
+            
+            if (EnablePolling.Checked)
+                LogPrintLine("Start polling at " + PollingRateValue.Value.ToString() + "ms!");
+            else
+                LogPrintLine("Stop polling timer!");
         }
 
         private void TestVibration_CheckedChanged(object sender, EventArgs e)
