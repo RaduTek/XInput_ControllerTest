@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace ControllerTest
             if (!controller.IsConnected)
             {
                 logPrintLine("Controller " + index.ToString() + " is not connected!");
+                SystemSounds.Exclamation.Play();
                 return;
             }
 
@@ -68,6 +70,7 @@ namespace ControllerTest
             {
                 pollingTimer.Enabled = false;
                 logPrintLine("Controller disconnected!");
+                SystemSounds.Exclamation.Play();
                 reconnectBtn.Visible = true;
                 return;
             }
