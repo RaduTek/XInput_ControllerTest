@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.LogBox = new System.Windows.Forms.TextBox();
             this.LogPanel = new System.Windows.Forms.Panel();
             this.PollingTimer = new System.Windows.Forms.Timer(this.components);
@@ -755,6 +756,7 @@
             this.Controls.Add(this.SelectedControllerIndex);
             this.Controls.Add(this.LogPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
